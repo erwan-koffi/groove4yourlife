@@ -23,7 +23,7 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update() {
       if (Time.time > nextSpawn) {
-        nextSpawn = Time.time + spawnRate;
+        nextSpawn = Time.time + FindObjectOfType<GameManager>().secPerBeat;
         float y = BASE_Y + (int) Random.Range(0f, 10f);
         spawnPosition = new Vector2(SPAWN_X, y);
         Instantiate(enemy, spawnPosition, Quaternion.identity);
