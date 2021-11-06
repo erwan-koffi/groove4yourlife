@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class MoveBar : MonoBehaviour
 {
+    RectTransform rectTransform;
+    public Vector3 pos;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rectTransform = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if (gameObject.transform.position.x < -13) {
-            transform.Translate(23, 0, 0);
-        }
-        else {
-            transform.Translate(Time.deltaTime*-4, 0, 0);
+        Vector2 position = rectTransform.anchoredPosition;
+
+        position.x += FindObjectOfType<GameManager>().secPerBeat * 300 * Time.deltaTime;
+
+        rectTransform.anchoredPosition = position;
+        if(position.x >= 200)
+        {
+            Destroy(gameObject);
         }
     }
 }

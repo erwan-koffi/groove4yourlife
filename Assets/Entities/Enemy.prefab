@@ -174,7 +174,7 @@ MonoBehaviour:
   - {x: 0.5023424, y: 0.4923951, z: 0}
   m_ShapePathHash: 413674624
   m_Mesh: {fileID: 0}
-  m_InstanceId: -106990
+  m_InstanceId: 55860
 --- !u!114 &65259342712633840
 MonoBehaviour:
   m_ObjectHideFlags: 0

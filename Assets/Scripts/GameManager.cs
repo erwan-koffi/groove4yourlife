@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int BPM = 120;
     public float tolerance = 0.1f;
 
-    float secPerBeat;
+    public float secPerBeat;
 
     private void Start()
     {
