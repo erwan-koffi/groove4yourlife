@@ -5,14 +5,14 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
 
-    const float SPAWN_X = 0;
-    const float BASE_Y = -4f;
+    const float SPAWN_X = 16f;
+    const float BASE_Y = -5.5f;
 
     public GameObject enemy;
     public float spawnRate = 2f;
 
     float nextSpawn = 0.0f;
-    Vector2 spawnPosition;
+    public Vector2 spawnPosition;
 
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class SpawnEnemy : MonoBehaviour
     void Update() {
       if (Time.time > nextSpawn) {
         nextSpawn = Time.time + spawnRate;
-        float y = BASE_Y + (int)Random.Range(0f, 11f);
+        float y = BASE_Y + (int) Random.Range(0f, 10f);
         spawnPosition = new Vector2(SPAWN_X, y);
         Instantiate(enemy, spawnPosition, Quaternion.identity);
       }

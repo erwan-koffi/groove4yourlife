@@ -5,15 +5,10 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
-    const float MINIMUM = -11f;
-    const float MAXIMUM = 11f;
-
     public float maxSpeed = 10f;
 
     float horizontal;
     float vertical;
-    public float horizontal_position;
-    public float vertical_position;
     public float horizontal_velocity;
     public float vertical_velocity;
 
@@ -28,8 +23,6 @@ public class PlayerControl : MonoBehaviour
     void Update() {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        horizontal_position = body.position.x;
-        vertical_position = body.position.y;
     }
 
     private void FixedUpdate() {
