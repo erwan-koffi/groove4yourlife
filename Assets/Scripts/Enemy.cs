@@ -13,22 +13,64 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D body;
 
+    Vector3 direction;
+    bool stopped;
+
     // Start is called before the first frame update
     void Start() {
-      body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
+        direction = Vector3.left;
+        stopped = false;
     }
 
     // Update is called once per frame
     void Update() {}
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        bool toStop = collision.name == "Right";
+
+
+        if (collision.name.StartsWith("Enemy"))
+        {
+            BoxCollider2D collider = GetComponents<BoxCollider2D>()[1];
+            if (collider.IsTouching(collision))
+            {
+                Enemy enemy = collision.GetComponent<Enemy>();
+                toStop = enemy.stopped;
+                if (enemy.stopped)
+                {
+                    toStop = true;
+                } else
+                {
+                    direction = Vector3.left / 2;
+                }
+            }
+        }
+
+        if (toStop)
+        {
+                direction = Vector3.zero;
+                stopped = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.name.StartsWith("Enemy"))
+        {
+            direction = Vector3.left;
+        }
+    }
+
     private void FixedUpdate() {
-      transform.Translate(Vector3.left * Time.deltaTime);
+      transform.Translate(direction * Time.deltaTime);
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        float newScale = health * scale / MAX_HEALTH;
+        float newScale = (health * scale / MAX_HEALTH) + 0.02f;
         if (health <= 0)
         {
             Die();
