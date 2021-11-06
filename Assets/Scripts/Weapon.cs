@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 
     public Transform firepoint;
     public GameObject bulletPrefab;
+    public float lastShootTime = 0f;
 
     // Start is called before the first frame update
     void Start() {
@@ -17,6 +18,8 @@ public class Weapon : MonoBehaviour
     void Update() {
         if (Input.GetButtonDown("Fire1")) {
             Shoot();
+            FindObjectOfType<GameManager>().manageMultiplier(lastShootTime, Time.fixedTime);
+            lastShootTime = Time.fixedTime;
         }
     }
 
