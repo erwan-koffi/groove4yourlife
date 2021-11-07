@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartDelay: 1
   gameOverScreen: {fileID: 74799184}
-  health: 1000
+  health: 10
   multiplier: 1
   BPM: 120
   tolerance: 0.1

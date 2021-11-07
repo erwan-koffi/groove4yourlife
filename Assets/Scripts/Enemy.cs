@@ -16,11 +16,14 @@ public class Enemy : MonoBehaviour
     Vector3 direction;
     bool stopped;
 
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start() {
         body = GetComponent<Rigidbody2D>();
         direction = Vector3.left;
         stopped = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,10 @@ public class Enemy : MonoBehaviour
     {
         bool toStop = collision.name == "Right";
 
+        if (collision.name == "Right")
+        {
+            audioSource.Play(0);
+        }
 
         if (collision.name.StartsWith("Enemy"))
         {
