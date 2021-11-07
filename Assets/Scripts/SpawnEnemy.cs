@@ -9,7 +9,6 @@ public class SpawnEnemy : MonoBehaviour
     const float BASE_Y = -5.5f;
 
     public GameObject enemy;
-    public float spawnRate = 2f;
 
     float nextSpawn = 0.0f;
     public Vector2 spawnPosition;

@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public float lastShootTime = 0f;
     public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     // Start is called before the first frame update
     void Start() {
@@ -19,7 +20,9 @@ public class Weapon : MonoBehaviour
     void Update() {
         if (Input.GetButtonDown("Fire1")) {
             Shoot();
-            audioSource.pitch = (int)Random.Range(1f, 4f);
+            //audioSource.pitch = (int)Random.Range(1f, 3f);
+            int clip = (int)Random.Range(0f, 4f);
+            audioSource.clip = audioClips[clip];
             audioSource.Play(0);
             FindObjectOfType<GameManager>().manageMultiplier(lastShootTime, Time.fixedTime);
             lastShootTime = Time.fixedTime;

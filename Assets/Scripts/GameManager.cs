@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         secPerBeat = 60f / BPM;
     }
 
-    void GameOver()
+    public void GameOver()
     {
         if(!gameover)
         {
