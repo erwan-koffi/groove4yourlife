@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     public float maxSpeed = 5f;
     public int health = 10;
-
+    public float speed = 1.001f;
     float scale = 0.9f;
 
     Rigidbody2D body;
@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void FixedUpdate() {
-      transform.Translate(direction * Time.deltaTime);
+      transform.Translate(direction * speed * Time.deltaTime);
     }
 
     public void TakeDamage(int damage)

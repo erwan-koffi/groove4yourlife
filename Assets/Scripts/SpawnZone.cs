@@ -29,7 +29,7 @@ public class SpawnZone : MonoBehaviour
         {
             if (nextSpawn != 0f)
             {
-                Vector3 pos = new Vector3(Random.Range(MIN_X, MAX_X), Random.Range(MIN_Y, MAX_Y), 2f);
+                Vector3 pos = new Vector3(Random.Range(MIN_X, MAX_X), Random.Range(MIN_Y, MAX_Y), 1f);
                 Instantiate(zone, pos, Quaternion.identity);
             }
             nextSpawn = t + (FindObjectOfType<GameManager>().secPerBeat * 16);

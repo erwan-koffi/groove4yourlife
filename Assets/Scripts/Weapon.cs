@@ -9,6 +9,8 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public float lastShootTime = 0f;
     public AudioSource audioSource;
+    public AudioSource normalMusic;
+    public AudioSource bonusMusic;
     public AudioClip[] audioClips;
     public int laserDuration = 8;
     float laserStart;
@@ -16,6 +18,9 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         audioSource = GetComponent<AudioSource>();
+        AudioSource[] audio = FindObjectOfType<GameManager>().GetComponents<AudioSource>();
+        normalMusic = audio[0];
+        bonusMusic = audio[1];
     }
 
     // Update is called once per frame
@@ -43,11 +48,16 @@ public class Weapon : MonoBehaviour
     public void Laser()
     {
         laserStart = Time.time;
+        normalMusic.mute = true;
+        bonusMusic.mute = false;
         transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+        FindObjectOfType<ShakeBehavior>().TriggerShake(FindObjectOfType<GameManager>().secPerBeat * laserDuration);
     }
 
     public void LaserEnd()
     {
+        normalMusic.mute = false;
+        bonusMusic.mute = true;
         transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
     }
 }
