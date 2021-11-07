@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     public AudioClip[] audioClips;
     public int laserDuration = 8;
     float laserStart;
+    bool firingLaser = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -25,7 +26,7 @@ public class Weapon : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1") && !firingLaser) {
             Shoot();
             //audioSource.pitch = (int)Random.Range(1f, 3f);
             int clip = (int)Random.Range(0f, 4f);
@@ -36,6 +37,7 @@ public class Weapon : MonoBehaviour
         }
         if(laserStart + FindObjectOfType<GameManager>().secPerBeat * laserDuration <= Time.time)
         {
+            firingLaser = false;
             LaserEnd();
         }
     }
@@ -48,6 +50,7 @@ public class Weapon : MonoBehaviour
     public void Laser()
     {
         laserStart = Time.time;
+        firingLaser = true;
         normalMusic.mute = true;
         bonusMusic.mute = false;
         transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);

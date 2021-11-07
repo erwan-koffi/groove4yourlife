@@ -29,6 +29,8 @@ public class Bullet : MonoBehaviour
             ParticleSystem particle = GetComponent<ParticleSystem>();
             particle.Emit(100);
             particle.Play();
+            GetComponent<CircleCollider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().Sleep();
             GetComponent<Renderer>().enabled = false;
             destroyTime = Time.time;
             destroyed = true;

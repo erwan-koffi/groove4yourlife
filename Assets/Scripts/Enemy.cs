@@ -82,13 +82,13 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        float newScale = (health * scale / MAX_HEALTH) + 0.02f;
+        float newScale = (health * scale / MAX_HEALTH);
         if (health <= 0)
         {
             Die();
         } else
         {
-            gameObject.transform.localScale = new Vector3(newScale, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            gameObject.transform.localScale = new Vector3(Mathf.Max(newScale, 0.2f), gameObject.transform.localScale.y, gameObject.transform.localScale.z);
         }
     }
 

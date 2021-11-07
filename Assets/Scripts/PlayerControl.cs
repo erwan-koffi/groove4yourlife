@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
     public float horizontal_velocity;
     public float vertical_velocity;
 
-    Rigidbody2D body;
+    public Rigidbody2D body;
 
     // Start is called before the first frame update
     void Start() {
