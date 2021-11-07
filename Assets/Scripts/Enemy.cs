@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class Enemy : MonoBehaviour
     public float maxSpeed = 5f;
     public int health = 10;
     public float speed = 1.001f;
+    public int pause = 8;
+    public float pauseTime = 0f;
+    bool ignoreRight = false;
+    bool hasTouchedRight = false;
     float scale = 0.9f;
 
     Rigidbody2D body;
@@ -27,15 +32,58 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {}
+    void Update() {
+
+      if(hasTouchedRight && pauseTime + 2 * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        transform.GetChild(1).GetComponent<Light2D>().enabled = true;
+      }
+
+      if(hasTouchedRight && pauseTime + 4 * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        transform.GetChild(1).GetComponent<Light2D>().enabled = false;
+      }
+
+      if(hasTouchedRight && pauseTime + 5 * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        transform.GetChild(1).GetComponent<Light2D>().enabled = true;
+      }
+
+      if(hasTouchedRight && pauseTime + 6 * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        transform.GetChild(1).GetComponent<Light2D>().enabled = false;
+      }
+
+      if(hasTouchedRight && pauseTime + 6.5 * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        transform.GetChild(1).GetComponent<Light2D>().enabled = true;
+      }
+
+      if(hasTouchedRight && pauseTime + 7 * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        transform.GetChild(1).GetComponent<Light2D>().enabled = false;
+      }
+
+      if(hasTouchedRight && pauseTime + 7.5 * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        transform.GetChild(1).GetComponent<Light2D>().enabled = false;
+      }
+
+      if(hasTouchedRight && pauseTime + pause * FindObjectOfType<GameManager>().secPerBeat <= Time.time) {
+        stopped = false;
+        ignoreRight = true;
+        direction = Vector3.left;
+        transform.GetChild(1).GetComponent<Light2D>().enabled = true;
+      }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         bool toStop = collision.name == "Right";
 
-        if (collision.name == "Right")
+        if (collision.name == "Right" && !ignoreRight)
         {
+            pauseTime = Time.time;
+            hasTouchedRight = true;
             audioSource.Play(0);
+        }
+
+        if (collision.name == "Left" || collision.name == "Player")
+        {
+          FindObjectOfType<GameManager>().GameOver();
         }
 
         if (collision.name.StartsWith("Enemy"))
@@ -94,6 +142,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        FindObjectOfType<GameManager>().incrementScore();
         Destroy(gameObject);
     }
 }

@@ -11,7 +11,6 @@ public class Weapon : MonoBehaviour
     public AudioSource audioSource;
     public AudioSource normalMusic;
     public AudioSource bonusMusic;
-    public AudioClip[] audioClips;
     public int laserDuration = 8;
     float laserStart;
     bool firingLaser = false;
@@ -28,9 +27,6 @@ public class Weapon : MonoBehaviour
     void Update() {
         if (Input.GetButtonDown("Fire1") && !firingLaser) {
             Shoot();
-            //audioSource.pitch = (int)Random.Range(1f, 3f);
-            int clip = (int)Random.Range(0f, 4f);
-            audioSource.clip = audioClips[clip];
             audioSource.Play(0);
             FindObjectOfType<GameManager>().manageMultiplier(lastShootTime, Time.fixedTime);
             lastShootTime = Time.fixedTime;

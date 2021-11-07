@@ -17,7 +17,7 @@ public class MoveBar : MonoBehaviour
     {
         Vector2 position = rectTransform.anchoredPosition;
 
-        position.x += FindObjectOfType<GameManager>().secPerBeat * 300 * Time.deltaTime;
+        position.x += FindObjectOfType<GameManager>().secPerBeat * 600 * Time.deltaTime;
 
         rectTransform.anchoredPosition = position;
         if(position.x >= 200)

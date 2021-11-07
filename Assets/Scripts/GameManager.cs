@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int laser;
     public float secPerBeat;
     public int shootChain = 10;
+    public int score;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if(!gameover)
         {
+            GetComponents<AudioSource>()[2].Play();
             gameover = true;
             Time.timeScale = 0f;
             gameOverScreen.Setup();
@@ -78,5 +80,10 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+    }
+
+    public void incrementScore() {
+      score++;
+      FindObjectOfType<UI>().setScore(score);
     }
 }

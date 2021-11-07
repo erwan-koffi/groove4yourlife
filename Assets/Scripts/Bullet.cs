@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
             Enemy enemy = hitInfo.GetComponent<Enemy>();
             if(enemy != null)
             {
+                GetComponent<AudioSource>().Play();
                 enemy.TakeDamage(FindObjectOfType<GameManager>().multiplier);
             }
             ParticleSystem particle = GetComponent<ParticleSystem>();

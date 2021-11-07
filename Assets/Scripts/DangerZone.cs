@@ -18,7 +18,7 @@ public class DangerZone : MonoBehaviour
         float beat = FindObjectOfType<GameManager>().secPerBeat;
         GameObject sprite2 = gameObject.transform.GetChild(1).gameObject;
 
-        if (spawnTime + (12 * beat) <= Time.time)
+        if (spawnTime + (8 * beat) <= Time.time)
         {
             Destroy(gameObject);
         }
@@ -38,6 +38,7 @@ public class DangerZone : MonoBehaviour
         }
         else if (spawnTime + 4 * beat >= Time.time)
         {
+            GetComponent<AudioSource>().Play();
             sprite2.SetActive(true);
             GetComponent<BoxCollider2D>().enabled = true;
         }
