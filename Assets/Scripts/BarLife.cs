@@ -5,13 +5,19 @@ using UnityEngine;
 public class BarLife : MonoBehaviour
 {
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        FindObjectOfType<GameManager>().decreaseHealth();
+        if(collision.name.StartsWith("Enemy"))
+        {
+            FindObjectOfType<GameManager>().decreaseHealth();
+        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        FindObjectOfType<GameManager>().increaseHealth();
+        if (collision.name.StartsWith("Enemy"))
+        {
+            FindObjectOfType<GameManager>().increaseHealth();
+        }
     }
 }

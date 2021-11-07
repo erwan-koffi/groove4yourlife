@@ -6,11 +6,15 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 20f;
     public Rigidbody2D rb;
+    public bool destroyed;
+    public float destroyTime;
 
     // Start is called before the first frame update
     void Start()
     {
         rb.velocity = transform.right * speed;
+        destroyed = false;
+        destroyTime = 0f;
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
@@ -22,7 +26,24 @@ public class Bullet : MonoBehaviour
             {
                 enemy.TakeDamage(FindObjectOfType<GameManager>().multiplier);
             }
-            Destroy(gameObject);
+            ParticleSystem particle = GetComponent<ParticleSystem>();
+            particle.Emit(100);
+            particle.Play();
+            GetComponent<Renderer>().enabled = false;
+            destroyTime = Time.time;
+            destroyed = true;
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    private void Update()
+    {
+        if(destroyed)
+        {
+            if (destroyTime + (FindObjectOfType<GameManager>().secPerBeat / 2) <= Time.time)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

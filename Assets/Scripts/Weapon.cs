@@ -10,6 +10,8 @@ public class Weapon : MonoBehaviour
     public float lastShootTime = 0f;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
+    public int laserDuration = 8;
+    float laserStart;
 
     // Start is called before the first frame update
     void Start() {
@@ -27,10 +29,25 @@ public class Weapon : MonoBehaviour
             FindObjectOfType<GameManager>().manageMultiplier(lastShootTime, Time.fixedTime);
             lastShootTime = Time.fixedTime;
         }
+        if(laserStart + FindObjectOfType<GameManager>().secPerBeat * laserDuration <= Time.time)
+        {
+            LaserEnd();
+        }
     }
 
     void Shoot()
     {
         Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+    }
+
+    public void Laser()
+    {
+        laserStart = Time.time;
+        transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void LaserEnd()
+    {
+        transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
     }
 }

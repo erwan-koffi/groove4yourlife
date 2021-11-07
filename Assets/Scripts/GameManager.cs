@@ -10,12 +10,14 @@ public class GameManager : MonoBehaviour
     public int multiplier = 1;
     public int BPM = 120;
     public float tolerance = 0.1f;
-
+    public int laser;
     public float secPerBeat;
+    public int shootChain = 10;
 
     private void Start()
     {
         secPerBeat = 60f / BPM;
+        laser = 0;
     }
 
     public void GameOver()
@@ -47,6 +49,11 @@ public class GameManager : MonoBehaviour
             multiplier += 1;
             FindObjectOfType<UI>().setMultiplier(multiplier);
         }
+        laser += 1;
+        if (laser % shootChain == 0)
+        {
+            FindObjectOfType<Weapon>().Laser();
+        }
     }
 
     public void decreaseMultiplier()
@@ -56,6 +63,7 @@ public class GameManager : MonoBehaviour
             multiplier -= 1;
             FindObjectOfType<UI>().setMultiplier(multiplier);
         }
+        laser = 0;
     }
 
     public void increaseHealth()

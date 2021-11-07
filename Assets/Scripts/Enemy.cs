@@ -60,6 +60,11 @@ public class Enemy : MonoBehaviour
                 direction = Vector3.zero;
                 stopped = true;
         }
+
+        if (collision.name == "Beam")
+        {
+            Die();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
