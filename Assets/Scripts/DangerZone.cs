@@ -36,7 +36,7 @@ public class DangerZone : MonoBehaviour
         {
             sprite2.SetActive(false);
         }
-        else if (spawnTime + 4 * beat >= Time.time)
+        else if (spawnTime + 4 * beat >= Time.time && !FindObjectOfType<GameManager>().gameover)
         {
             GetComponent<AudioSource>().Play();
             sprite2.SetActive(true);

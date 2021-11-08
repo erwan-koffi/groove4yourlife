@@ -79,6 +79,7 @@ public class Enemy : MonoBehaviour
             pauseTime = Time.time;
             hasTouchedRight = true;
             audioSource.Play(0);
+            transform.GetChild(1).GetComponent<Light2D>().enabled = true;
         }
 
         if (collision.name == "Left" || collision.name == "Player")

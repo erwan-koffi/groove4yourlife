@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    bool gameover = false;
+    public bool gameover = false;
     public float restartDelay = 1f;
     public GameOverScreen gameOverScreen;
     public int health = 10;
@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
         if(!gameover)
         {
             GetComponents<AudioSource>()[2].Play();
+            DangerZone[] dangerZones = FindObjectsOfType<DangerZone>();
+            foreach(DangerZone dangerZone in dangerZones) {
+              dangerZone.GetComponent<AudioSource>().Stop();
+            }
             gameover = true;
             Time.timeScale = 0f;
             gameOverScreen.Setup();
