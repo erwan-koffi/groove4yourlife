@@ -75,11 +75,13 @@ public class GameManager : MonoBehaviour
     public void increaseHealth()
     {
         health += 1;
+        FindObjectOfType<UI>().setHealth(health);
     }
 
     public void decreaseHealth()
     {
         health -= 1;
+        FindObjectOfType<UI>().setHealth(health);
         if (health <= 0)
         {
             GameOver();

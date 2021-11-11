@@ -17,12 +17,14 @@ public class MoveBar : MonoBehaviour
     {
         Vector2 position = rectTransform.anchoredPosition;
 
-        position.x += FindObjectOfType<GameManager>().secPerBeat * 600 * Time.deltaTime;
+        position.x += FindObjectOfType<GameManager>().secPerBeat * 615 * Time.deltaTime;
 
-        rectTransform.anchoredPosition = position;
         if(position.x >= 200)
         {
-            Destroy(gameObject);
+            //DestroyImmediate(gameObject);
+            position.x = FindObjectOfType<SpawnBar>().spawnPosition().x;
         }
+
+        rectTransform.anchoredPosition = position;
     }
 }

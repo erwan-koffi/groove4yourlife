@@ -7,6 +7,7 @@ public class UI : MonoBehaviour
 {
     public TextMeshProUGUI multiplierText;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI healthText;
 
     public void setMultiplier(int multiplier)
     {
@@ -16,5 +17,10 @@ public class UI : MonoBehaviour
     public void setScore(int score)
     {
       scoreText.SetText("{}", score);
+    }
+
+    public void setHealth(int health)
+    {
+        healthText.SetText("{}", health);
     }
 }
