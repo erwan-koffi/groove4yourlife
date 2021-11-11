@@ -25,11 +25,8 @@ public class Weapon : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("Fire1") && !firingLaser) {
+        if (Input.GetButtonDown("Fire1")) {
             Shoot();
-            audioSource.Play(0);
-            FindObjectOfType<GameManager>().manageMultiplier(lastShootTime, Time.fixedTime);
-            lastShootTime = Time.fixedTime;
         }
         if(laserStart + FindObjectOfType<GameManager>().secPerBeat * laserDuration <= Time.time)
         {
@@ -38,9 +35,15 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
-        Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+        if(!firingLaser)
+        {
+            Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+            audioSource.Play(0);
+            FindObjectOfType<GameManager>().manageMultiplier(lastShootTime, Time.fixedTime);
+            lastShootTime = Time.fixedTime;
+        }
     }
 
     public void Laser()

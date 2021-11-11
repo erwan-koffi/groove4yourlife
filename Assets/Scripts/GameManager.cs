@@ -14,11 +14,17 @@ public class GameManager : MonoBehaviour
     public float secPerBeat;
     public int shootChain = 10;
     public int score;
+    public MobileProperties mobileProperties;
+    public Canvas mobileUI;
 
     private void Start()
     {
         secPerBeat = 60f / BPM;
         laser = 0;
+        if(mobileProperties.isMobile())
+        {
+            mobileUI.gameObject.SetActive(true);
+        }
     }
 
     public void GameOver()

@@ -12,6 +12,8 @@ public class PlayerControl : MonoBehaviour
     public float horizontal_velocity;
     public float vertical_velocity;
 
+    public Joystick joystick;
+
     public Rigidbody2D body;
 
     // Start is called before the first frame update
@@ -21,8 +23,8 @@ public class PlayerControl : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxis("Horizontal") + joystick.Horizontal;
+        vertical = Input.GetAxis("Vertical") + joystick.Vertical;
     }
 
     private void FixedUpdate() {
